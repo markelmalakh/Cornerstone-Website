@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cornerstone-EC — Florida General Contractor | Commercial &amp; Residential</title>
+<meta name="description" content="Cornerstone Engineering &amp; Contracting — a licensed Florida general contractor with ten years building commercial and residential projects. Preconstruction, design-build, and construction management, delivered from the first stone to the final walkthrough." />
+
+<!-- Fonts. If self-hosting later, download these and swap the <link> for @font-face. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   CORNERSTONE-EC  ·  "Set in Stone"
+   Palette, type, and layout all derive from the drafting/
+   construction world: blueprint navy, poured concrete, survey
+   amber, cyanotype blue. The page warms as the build completes.
+   ============================================================ */
+
+:root{
+  /* ---- color ---- */
+  --navy-deep:#0E1B2C;
+  --navy:#16283F;
+  --navy-soft:#20374F;
+  --concrete:#E8E4DB;
+  --concrete-2:#DFDACE;
+  --concrete-dim:#CFC8B9;
+  --ink:#18170F;
+  --ink-soft:#3C3A31;
+  --chalk:#F5F2EC;
+  --amber:#CE7A34;
+  --amber-bright:#E58C3A;
+  --amber-deep:#A85E22;
+  --blueprint:#5C7FA3;
+  --blueprint-deep:#3E5C7E;
+
+  /* ---- type ---- */
+  --display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---- layout ---- */
+  --rail:78px;             /* left gutter reserved for the spine */
+  --measure:1180px;
+  --pad-x:clamp(1.25rem, 5vw, 4.5rem);
+  --sec-y:clamp(5rem, 12vh, 11rem);
+
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--concrete);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(1rem,0.55vw + 0.9rem,1.075rem);
+  line-height:1.62;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+
+/* Expanded display face via Archivo's width axis */
+.display{
+  font-family:var(--display);
+  font-weight:800;
+  font-variation-settings:"wght" 800,"wdth" 125;
+  line-height:0.94;
+  letter-spacing:-0.01em;
+  text-transform:uppercase;
+}
+.mono{
+  font-family:var(--mono);
+  text-transform:uppercase;
+  letter-spacing:0.18em;
+  font-size:0.72rem;
+  font-weight:500;
+}
+
+/* ---------- selection & focus ---------- */
+::selection{background:var(--amber);color:var(--navy-deep)}
+:focus-visible{outline:2.5px solid var(--amber);outline-offset:3px;border-radius:2px}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-head{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;
+  padding:0.85rem var(--pad-x);
+  background:color-mix(in srgb, var(--concrete) 82%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
+}
+.site-head.is-dark{
+  background:color-mix(in srgb, var(--navy-deep) 78%, transparent);
+  color:var(--chalk);
+  border-bottom-color:rgba(245,242,236,.09);
+}
+.site-head.scrolled{border-bottom-color:rgba(24,23,15,.12)}
+.site-head.is-dark.scrolled{border-bottom-color:rgba(245,242,236,.14)}
+
+.brand{display:flex;align-items:center;gap:.62rem;font-family:var(--display);
+  font-weight:800;font-variation-settings:"wght" 800,"wdth" 110;
+  text-transform:uppercase;letter-spacing:.02em;font-size:1.02rem}
+.brand .stone{
+  width:15px;height:15px;background:var(--amber);
+  transform:rotate(0);flex:none;
+  box-shadow:3px 3px 0 color-mix(in srgb, var(--amber-deep) 90%, black 10%);
+}
+.brand small{font-family:var(--mono);font-weight:500;font-size:.6rem;
+  letter-spacing:.22em;opacity:.6;display:block;margin-top:2px;text-transform:uppercase}
+
+.nav{display:flex;align-items:center;gap:1.85rem}
+.nav a{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;opacity:.72;position:relative;padding:.3rem 0;transition:opacity .25s}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1.5px;
+  background:var(--amber);transition:right .3s var(--ease)}
+.nav a:hover{opacity:1}
+.nav a:hover::after,.nav a.active::after{right:0}
+.nav a.active{opacity:1}
+
+.head-cta{display:flex;align-items:center;gap:1rem}
+.head-phone{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;opacity:.85;white-space:nowrap}
+.btn{
+  --btn-bg:var(--amber);--btn-fg:var(--navy-deep);
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--btn-bg);color:var(--btn-fg);
+  font-family:var(--mono);font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;font-size:.72rem;
+  padding:.72rem 1.15rem;border:none;
+  transition:transform .25s var(--ease), background .25s;
+}
+.btn:hover{transform:translateY(-2px);background:var(--amber-bright)}
+.btn .arw{transition:transform .3s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+.btn--ghost{--btn-bg:transparent;--btn-fg:currentColor;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn--ghost:hover{background:transparent;--btn-fg:var(--amber)}
+
+.menu-toggle{display:none}
+
+/* ============================================================
+   THE SPINE  (fixed plumb line + rising elevation)
+   ============================================================ */
+.spine{
+  position:fixed;left:calc(var(--rail) / 2);top:0;bottom:0;width:2px;z-index:20;
+  background:rgba(24,23,15,.14);
+  pointer-events:none;
+}
+.spine.on-dark{background:rgba(245,242,236,.16)}
+.spine__fill{position:absolute;top:0;left:0;right:0;height:0;background:var(--amber);
+  box-shadow:0 0 14px color-mix(in srgb,var(--amber) 60%, transparent)}
+.spine__bead{
+  position:absolute;left:50%;top:0;width:11px;height:11px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  background:var(--amber);box-shadow:0 0 0 4px color-mix(in srgb,var(--amber) 22%, transparent);
+}
+.elev-readout{
+  position:fixed;left:calc(var(--rail) / 2 + 14px);z-index:21;
+  top:50%;transform:translateY(-50%);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;
+  color:var(--amber-deep);writing-mode:vertical-rl;pointer-events:none;
+  transition:color .4s;
+}
+.elev-readout.on-dark{color:var(--amber-bright)}
+
+/* ============================================================
+   LAYOUT PRIMITIVES
+   ============================================================ */
+main{position:relative;z-index:2}
+.chapter{position:relative;padding:var(--sec-y) var(--pad-x) var(--sec-y) var(--rail)}
+.chapter__inner{max-width:var(--measure);margin:0 auto;width:100%}
+.chapter--dark{background:var(--navy-deep);color:var(--chalk)}
+.chapter--navy{background:var(--navy);color:var(--chalk)}
+
+/* phase marker that rides the spine */
+.marker{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.4rem;
+  opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.marker .phase{font-family:var(--mono);font-weight:600;letter-spacing:.2em;font-size:.72rem;
+  color:var(--amber-deep)}
+.chapter--dark .marker .phase,.chapter--navy .marker .phase{color:var(--amber-bright)}
+.marker .rule{flex:1;height:1px;background:currentColor;opacity:.22;transform:translateY(-3px)}
+.marker .elev{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;opacity:.6}
+
+/* reveal system */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+.marker.in{opacity:1;transform:none}
+
+h2.head{font-family:var(--display);font-weight:800;font-variation-settings:"wght" 800,"wdth" 118;
+  text-transform:uppercase;line-height:.98;letter-spacing:-.01em;
+  font-size:clamp(2.1rem,5.2vw,4.15rem);margin:0 0 1.1rem}
+.lede{font-size:clamp(1.08rem,1.6vw,1.4rem);line-height:1.5;max-width:46ch;color:var(--ink-soft)}
+.chapter--dark .lede,.chapter--navy .lede{color:color-mix(in srgb,var(--chalk) 82%, transparent)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;
+  padding:8.5rem var(--pad-x) 2.5rem var(--rail);
+  display:flex;flex-direction:column;justify-content:center;
+  background:
+    radial-gradient(120% 90% at 82% 8%, rgba(92,127,163,.22) 0, transparent 60%),
+    linear-gradient(180deg,var(--navy-deep) 0%, #10233a 62%, #0c1a2b 100%);
+  color:var(--chalk);overflow:hidden;
+}
+/* blueprint grid wash behind hero */
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    linear-gradient(rgba(92,127,163,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(92,127,163,.10) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(120% 100% at 70% 30%,#000 30%,transparent 78%);
+          mask-image:radial-gradient(120% 100% at 70% 30%,#000 30%,transparent 78%);
+}
+.hero__inner{position:relative;max-width:var(--measure);margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+
+.hero__eyebrow{display:flex;align-items:center;gap:.8rem;color:var(--amber-bright);margin-bottom:1.7rem}
+.hero__eyebrow .tick{width:26px;height:1.5px;background:var(--amber)}
+.hero h1{margin:0;font-family:var(--display);font-weight:800;
+  font-variation-settings:"wght" 830,"wdth" 125;text-transform:uppercase;
+  line-height:.9;letter-spacing:-.015em;
+  font-size:clamp(3rem,10vw,7.6rem);}
+.hero h1 .amber{
+  color:var(--amber-bright);
+  display:inline-block;position:relative;
+}
+.hero h1 .amber::after{content:"";position:absolute;left:0;bottom:.06em;width:100%;height:.09em;
+  background:var(--amber);transform:scaleX(var(--u,0));transform-origin:left;
+  transition:transform .9s .5s var(--ease)}
+.hero.lit h1 .amber::after{--u:1}
+.hero__sub{margin:1.9rem 0 2.3rem;font-size:clamp(1.05rem,1.5vw,1.32rem);
+  line-height:1.55;max-width:40ch;color:color-mix(in srgb,var(--chalk) 84%, transparent)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+
+/* hero blueprint art (SVG draws in) */
+.blueprint-art{width:100%;height:auto;overflow:visible}
+.blueprint-art .draw{fill:none;stroke:var(--blueprint);stroke-width:1.6;
+  stroke-linecap:square;stroke-linejoin:miter;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset 1.5s var(--ease)}
+.hero.lit .blueprint-art .draw{stroke-dashoffset:0}
+.blueprint-art .fillstone{fill:var(--amber);opacity:0;transition:opacity .6s 1.5s}
+.hero.lit .blueprint-art .fillstone{opacity:1}
+.blueprint-art .anno{fill:var(--blueprint);font-family:var(--mono);
+  font-size:9px;letter-spacing:.12em;opacity:0;transition:opacity .5s 1.7s}
+.hero.lit .blueprint-art .anno{opacity:.9}
+.blueprint-art .ground{stroke:var(--amber);stroke-width:2}
+
+/* hero stat strip */
+.hero__stats{position:relative;z-index:2;max-width:var(--measure);margin:clamp(2.5rem,5vh,4rem) auto 0;
+  width:100%;display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(245,242,236,.16)}
+.hero__stats div{padding:1.15rem 1.1rem 0;border-left:1px solid rgba(245,242,236,.10)}
+.hero__stats div:first-child{border-left:none;padding-left:0}
+.hero__stats .n{font-family:var(--display);font-weight:800;
+  font-variation-settings:"wght" 800,"wdth" 118;font-size:clamp(1.5rem,3vw,2.3rem);
+  line-height:1;color:var(--chalk)}
+.hero__stats .l{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;opacity:.6;margin-top:.5rem;line-height:1.3}
+
+.scroll-cue{position:absolute;bottom:1.4rem;left:var(--rail);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  opacity:.55;display:flex;align-items:center;gap:.6rem}
+.scroll-cue .bar{width:1px;height:34px;background:linear-gradient(var(--amber),transparent);
+  animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ============================================================
+   PRECONSTRUCTION  (cool / blueprint)
+   ============================================================ */
+.chapter--plan{background:
+    linear-gradient(180deg,var(--concrete) 0,#e4e6e6 100%);
+}
+.chapter--plan .marker .phase{color:var(--blueprint-deep)}
+.plan-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.plan-list{list-style:none;margin:2.2rem 0 0;padding:0;display:grid;gap:0}
+.plan-list li{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:baseline;
+  padding:1.15rem 0;border-top:1px solid var(--concrete-dim)}
+.plan-list li:last-child{border-bottom:1px solid var(--concrete-dim)}
+.plan-list .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--blueprint-deep)}
+.plan-list h4{margin:0 0 .25rem;font-family:var(--display);font-weight:700;
+  font-variation-settings:"wght" 720,"wdth" 108;text-transform:uppercase;
+  letter-spacing:.01em;font-size:1.06rem}
+.plan-list p{margin:0;font-size:.95rem;color:var(--ink-soft);line-height:1.5}
+
+/* blueprint drawing panel */
+.plan-draw{position:relative;aspect-ratio:4/5;background:var(--blueprint-deep);
+  overflow:hidden;box-shadow:0 30px 60px -30px rgba(14,27,44,.55)}
+.plan-draw::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);background-size:26px 26px}
+.plan-draw svg{position:absolute;inset:0;width:100%;height:100%}
+.plan-draw .pline{fill:none;stroke:#cfe0f0;stroke-width:1.4;opacity:.92}
+.plan-draw .paccent{stroke:var(--amber);stroke-width:2}
+.plan-draw .ptext{fill:#cfe0f0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;opacity:.85}
+.plan-draw .cap{position:absolute;left:16px;bottom:14px;font-family:var(--mono);
+  font-size:.62rem;letter-spacing:.16em;color:#cfe0f0;opacity:.85;text-transform:uppercase}
+
+/* ============================================================
+   THE BUILD  (services as rising courses)
+   ============================================================ */
+.courses{display:grid;gap:0;margin-top:2.5rem;border-top:1px solid rgba(245,242,236,.14)}
+.course{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(1rem,3vw,2.5rem);
+  align-items:center;padding:clamp(1.5rem,3vw,2.2rem) 0;
+  border-bottom:1px solid rgba(245,242,236,.14);position:relative;transition:background .35s}
+.course:hover{background:rgba(245,242,236,.035)}
+.course .idx{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;color:var(--amber-bright);opacity:.85}
+.course .body h3{margin:0 0 .4rem;font-family:var(--display);font-weight:750;
+  font-variation-settings:"wght" 760,"wdth" 116;text-transform:uppercase;
+  letter-spacing:0;font-size:clamp(1.3rem,2.6vw,2rem);line-height:1;
+  transition:color .3s,transform .35s var(--ease)}
+.course:hover .body h3{color:var(--amber-bright);transform:translateX(6px)}
+.course .body p{margin:0;max-width:56ch;color:color-mix(in srgb,var(--chalk) 76%, transparent);font-size:.98rem}
+.course .plus{width:34px;height:34px;position:relative;flex:none;opacity:.6;transition:opacity .3s,transform .3s}
+.course:hover .plus{opacity:1;transform:rotate(90deg)}
+.course .plus::before,.course .plus::after{content:"";position:absolute;background:var(--amber);
+  left:50%;top:50%}
+.course .plus::before{width:16px;height:2px;transform:translate(-50%,-50%)}
+.course .plus::after{width:2px;height:16px;transform:translate(-50%,-50%)}
+
+/* ============================================================
+   FINISHING  (work / project types gallery)
+   ============================================================ */
+.chapter--work{background:linear-gradient(180deg,#e4e6e6 0,var(--concrete) 55%, #efe7d9 100%)}
+.work-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:2.6rem}
+.tile{position:relative;overflow:hidden;background:var(--navy);color:var(--chalk);
+  min-height:0;isolation:isolate;transition:transform .5s var(--ease)}
+.tile--lg{grid-column:span 3;aspect-ratio:16/11}
+.tile--sm{grid-column:span 2;aspect-ratio:1/1}
+.tile--wide{grid-column:span 3;aspect-ratio:16/7}
+/* placeholder art: concrete/blueprint gradient stand-in for a photo */
+.tile .ph{position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(135deg, rgba(206,122,52,.16), transparent 55%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 10px, transparent 10px 20px),
+    linear-gradient(160deg,var(--navy-soft),var(--navy-deep));
+  transition:transform .8s var(--ease);
+}
+.tile:hover .ph{transform:scale(1.05)}
+.tile:hover{transform:translateY(-4px)}
+.tile figcaption{position:absolute;inset:auto 0 0 0;padding:1.2rem 1.25rem;
+  background:linear-gradient(0deg,rgba(10,20,32,.86),transparent);
+  display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
+.tile figcaption h3{margin:0;font-family:var(--display);font-weight:750;
+  font-variation-settings:"wght" 760,"wdth" 112;text-transform:uppercase;font-size:1.15rem;line-height:1}
+.tile figcaption .meta{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;
+  opacity:.7;text-align:right;line-height:1.4}
+.tile .slot-tag{position:absolute;top:12px;left:12px;font-family:var(--mono);
+  font-size:.56rem;letter-spacing:.12em;color:var(--amber-bright);opacity:.8;
+  border:1px dashed rgba(229,140,58,.5);padding:.25rem .45rem;text-transform:uppercase}
+
+/* ============================================================
+   COMPLETE  (proof / stats / values — warm)
+   ============================================================ */
+.chapter--complete{background:
+  linear-gradient(180deg,#efe7d9 0, #eadfcb 100%);position:relative;overflow:hidden}
+.chapter--complete::before{content:"";position:absolute;right:-10%;top:-20%;
+  width:60vw;height:120%;background:radial-gradient(closest-side,rgba(206,122,52,.16),transparent 70%);
+  pointer-events:none}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:2.8rem 0 3.5rem;
+  border-top:2px solid var(--ink)}
+.stat-row .cell{padding:1.6rem 1.3rem 0;border-left:1px solid var(--concrete-dim)}
+.stat-row .cell:first-child{border-left:none;padding-left:0}
+.stat-row .n{font-family:var(--display);font-weight:800;font-variation-settings:"wght" 820,"wdth" 122;
+  font-size:clamp(2.6rem,6vw,4.6rem);line-height:.9;letter-spacing:-.02em}
+.stat-row .n .u{color:var(--amber-deep)}
+.stat-row .l{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;margin-top:.7rem;color:var(--ink-soft);line-height:1.4}
+
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,3vw,2.4rem)}
+.value{border-top:1px solid var(--ink)}
+.value .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--amber-deep);
+  padding-top:.9rem;display:block}
+.value h4{font-family:var(--display);font-weight:750;font-variation-settings:"wght" 760,"wdth" 110;
+  text-transform:uppercase;font-size:1.25rem;margin:.6rem 0 .5rem;line-height:1}
+.value p{margin:0;font-size:.96rem;color:var(--ink-soft);line-height:1.55}
+
+.quote{margin:clamp(3rem,7vh,5rem) 0 0;max-width:62ch;position:relative}
+.quote blockquote{margin:0;font-family:var(--display);font-weight:600;
+  font-variation-settings:"wght" 600,"wdth" 108;text-transform:none;
+  font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.2;letter-spacing:-.01em}
+.quote .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:1.4rem;display:block}
+.quote .who .slot-note{color:var(--amber-deep)}
+
+/* ============================================================
+   CONTACT  (spine terminates in a cornerstone)
+   ============================================================ */
+.chapter--contact{background:var(--navy-deep);color:var(--chalk);position:relative;overflow:hidden}
+.chapter--contact::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+  background-image:linear-gradient(rgba(92,127,163,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(92,127,163,.10) 1px,transparent 1px);background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(90% 90% at 20% 30%,#000,transparent 75%);
+          mask-image:radial-gradient(90% 90% at 20% 30%,#000,transparent 75%)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem);position:relative}
+.contact-lead h2{font-size:clamp(2.4rem,6vw,5rem)}
+.contact-lead .cornerstone-mark{display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;color:var(--amber-bright);
+  margin-bottom:1.6rem}
+.contact-lead .cornerstone-mark .stone{width:14px;height:14px;background:var(--amber);
+  box-shadow:3px 3px 0 var(--amber-deep)}
+.direct{margin-top:2.6rem;display:grid;gap:1.35rem}
+.direct a,.direct span{display:flex;gap:1rem;align-items:baseline}
+.direct .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;opacity:.55;
+  min-width:78px;text-transform:uppercase}
+.direct .v{font-family:var(--display);font-weight:700;font-variation-settings:"wght" 700,"wdth" 106;
+  text-transform:uppercase;font-size:clamp(1.05rem,2vw,1.4rem);letter-spacing:.01em}
+.direct a:hover .v{color:var(--amber-bright)}
+
+/* form */
+form.enquiry{display:grid;gap:1.1rem;background:rgba(245,242,236,.035);
+  border:1px solid rgba(245,242,236,.12);padding:clamp(1.4rem,3vw,2.2rem)}
+.field{display:grid;gap:.45rem}
+.field label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.field input,.field select,.field textarea{
+  background:transparent;border:none;border-bottom:1.5px solid rgba(245,242,236,.22);
+  color:var(--chalk);font-family:var(--body);font-size:1rem;padding:.55rem 0;
+  transition:border-color .3s}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,242,236,.35)}
+.field select{color:var(--chalk)}
+.field select option{background:var(--navy);color:var(--chalk)}
+.field textarea{resize:vertical;min-height:88px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--amber)}
+.field--row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;font-size:.76rem}
+.form-note{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;opacity:.5;line-height:1.5}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-foot{background:#0a1522;color:var(--chalk);padding:3.5rem var(--pad-x) 2.5rem var(--rail)}
+.foot-inner{max-width:var(--measure);margin:0 auto;display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;gap:2rem;align-items:start}
+.foot-brand{font-family:var(--display);font-weight:800;font-variation-settings:"wght" 800,"wdth" 120;
+  text-transform:uppercase;font-size:1.5rem;line-height:.95}
+.foot-brand p{font-family:var(--body);font-weight:400;text-transform:none;
+  font-size:.9rem;opacity:.6;max-width:34ch;margin:.9rem 0 0;line-height:1.55}
+.foot-col h5{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  opacity:.5;margin:0 0 1rem}
+.foot-col a,.foot-col span{display:block;font-size:.92rem;opacity:.85;padding:.28rem 0}
+.foot-col a:hover{color:var(--amber-bright)}
+.foot-base{max-width:var(--measure);margin:2.8rem auto 0;padding-top:1.4rem;
+  border-top:1px solid rgba(245,242,236,.12);display:flex;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;opacity:.5;text-transform:uppercase}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1000px){
+  :root{--rail:clamp(1.25rem,5vw,4.5rem)}
+  .spine,.elev-readout{display:none}
+  .hero__inner{grid-template-columns:1fr;gap:2.5rem}
+  .blueprint-art{max-width:440px;order:2}
+  .plan-grid,.contact-grid{grid-template-columns:1fr}
+  .plan-draw{max-width:420px;order:-1}
+  .work-grid{grid-template-columns:repeat(4,1fr)}
+  .tile--lg,.tile--wide{grid-column:span 4}
+  .tile--sm{grid-column:span 2}
+}
+@media (max-width:760px){
+  .head-phone{display:none}
+  .brand{font-size:.92rem}
+  .brand small{display:none}
+  .head-cta .btn{display:none}            /* CTA lives inside the dropdown on mobile */
+  .menu-toggle{display:inline-flex;align-items:center;justify-content:center;
+    width:44px;height:40px;background:transparent;border:1.5px solid currentColor;color:inherit;font-size:1.15rem}
+  .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+    gap:0;background:var(--navy-deep);color:var(--chalk);
+    padding:.4rem var(--pad-x) 1.3rem;border-bottom:1px solid rgba(245,242,236,.14);
+    box-shadow:0 24px 40px -20px rgba(0,0,0,.6);
+    display:none}
+  .site-head.menu-open .nav{display:flex}
+  .nav a{padding:.95rem 0;font-size:.82rem;color:var(--chalk);opacity:.85;
+    border-bottom:1px solid rgba(245,242,236,.08)}
+  .nav a::after{display:none}
+  .nav .nav-cta{margin-top:1rem;background:var(--amber);color:var(--navy-deep);
+    text-align:center;border:none;font-weight:600;opacity:1;letter-spacing:.1em}
+  .hero__stats,.stat-row{grid-template-columns:1fr 1fr;gap:0}
+  .hero__stats div{border-left:1px solid rgba(245,242,236,.10)}
+  .hero__stats div:nth-child(odd){border-left:none;padding-left:0}
+  .hero__stats div:nth-child(n+3){border-top:1px solid rgba(245,242,236,.10);margin-top:1rem;padding-top:1.15rem}
+  .stat-row .cell{border-left:1px solid var(--concrete-dim)}
+  .stat-row .cell:nth-child(odd){border-left:none;padding-left:0}
+  .stat-row .cell:nth-child(n+3){margin-top:1.4rem}
+  .values{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr 1fr}
+  .tile--lg,.tile--wide{grid-column:span 2}
+  .tile--sm{grid-column:span 1}
+  .course{grid-template-columns:auto 1fr;gap:1rem}
+  .course .plus{display:none}
+  .field--row{grid-template-columns:1fr}
+  .foot-inner{grid-template-columns:1fr;gap:2.2rem}
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important}
+  .reveal,.marker{opacity:1 !important;transform:none !important;transition:none}
+  .blueprint-art .draw{stroke-dashoffset:0 !important;transition:none}
+  .blueprint-art .fillstone,.blueprint-art .anno{opacity:1 !important;transition:none}
+  .hero h1 .amber::after{--u:1}
+  .scroll-cue .bar{animation:none;height:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-head is-dark" id="head">
+  <a class="brand" href="#top" aria-label="Cornerstone-EC home">
+    <span class="stone" aria-hidden="true"></span>
+    <span>Cornerstone-EC<small>Gen. Contractor · FL</small></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#preconstruction">Preconstruction</a>
+    <a href="#build">The Build</a>
+    <a href="#work">Work</a>
+    <a href="#complete">Delivered</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Start a project &rarr;</a>
+  </nav>
+  <div class="head-cta">
+    <span class="head-phone">(555)&nbsp;000&#8209;0000</span>
+    <a class="btn" href="#contact">Start a project <span class="arw">&rarr;</span></a>
+    <button class="menu-toggle" aria-label="Open menu" id="menuBtn">&#9776;</button>
+  </div>
+</header>
+
+<!-- ===================== SPINE ===================== -->
+<div class="spine on-dark" id="spine" aria-hidden="true">
+  <div class="spine__fill" id="spineFill"><span class="spine__bead"></span></div>
+</div>
+<div class="elev-readout on-dark" id="elev">EL. 00&#8242;-0&#8243;</div>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero__inner">
+      <div>
+        <p class="hero__eyebrow mono"><span class="tick"></span>Licensed FL General Contractor · Est. 2016</p>
+        <h1>We set<br>the <span class="amber">corner&shy;stone</span>.</h1>
+        <p class="hero__sub">Ten years building commercial and residential projects across Florida —
+          carried from the first survey stake to the final walkthrough by one team that answers for the whole job.</p>
+        <div class="hero__actions">
+          <a class="btn" href="#contact">Start your project <span class="arw">&rarr;</span></a>
+          <a class="btn btn--ghost" href="#preconstruction">See how we build &darr;</a>
+        </div>
+      </div>
+
+      <!-- SIGNATURE: blueprint that draws a building rising from the cornerstone -->
+      <svg class="blueprint-art" id="bpArt" viewBox="0 0 360 380" role="img"
+           aria-label="Blueprint elevation of a building rising from its cornerstone">
+        <!-- ground line -->
+        <line class="ground" x1="10" y1="330" x2="350" y2="330" style="--len:340"/>
+        <!-- foundation footing -->
+        <path class="draw" style="--len:300" d="M60 330 L60 310 L300 310 L300 330"/>
+        <!-- the cornerstone (highlighted) -->
+        <rect class="fillstone" x="60" y="310" width="26" height="20"/>
+        <rect class="draw" style="--len:92" x="60" y="310" width="26" height="20"/>
+        <!-- storey 1 -->
+        <path class="draw" style="--len:520" d="M60 310 L60 250 L300 250 L300 310"/>
+        <line class="draw" style="--len:60" x1="120" y1="310" x2="120" y2="250"/>
+        <line class="draw" style="--len:60" x1="180" y1="310" x2="180" y2="250"/>
+        <line class="draw" style="--len:60" x1="240" y1="310" x2="240" y2="250"/>
+        <!-- storey 2 -->
+        <path class="draw" style="--len:460" d="M60 250 L60 195 L300 195 L300 250"/>
+        <rect class="draw" style="--len:120" x="90" y="210" width="30" height="26"/>
+        <rect class="draw" style="--len:120" x="165" y="210" width="30" height="26"/>
+        <rect class="draw" style="--len:120" x="240" y="210" width="30" height="26"/>
+        <!-- storey 3 (set back) -->
+        <path class="draw" style="--len:420" d="M90 195 L90 140 L270 140 L270 195"/>
+        <rect class="draw" style="--len:110" x="115" y="155" width="28" height="24"/>
+        <rect class="draw" style="--len:110" x="185" y="155" width="28" height="24"/>
+        <!-- roof / crane hint -->
+        <path class="draw" style="--len:170" d="M180 140 L180 95 L250 95"/>
+        <line class="draw" style="--len:34" x1="250" y1="95" x2="250" y2="112"/>
+        <!-- dimension + elevation annotations -->
+        <line class="draw" style="--len:240" x1="326" y1="140" x2="326" y2="330"/>
+        <path class="draw" style="--len:16" d="M322 140 L330 140 M322 330 L330 330"/>
+        <text class="anno" x="300" y="238" transform="rotate(-90 300 238)">ELEV. +38&#8242;</text>
+        <text class="anno" x="52" y="348">CORNERSTONE — SET 1</text>
+        <text class="anno" x="150" y="88">TOP OUT</text>
+      </svg>
+    </div>
+
+    <!-- hero stat strip -->
+    <div class="hero__stats">
+      <div><div class="n">10 yrs</div><div class="l">In business, Florida-based</div></div>
+      <div><div class="n">Com + Res</div><div class="l">Commercial &amp; residential</div></div>
+      <div><div class="n">Design–Build</div><div class="l">Plan to keys, one team</div></div>
+      <div><div class="n">Licensed</div><div class="l">FL general contractor</div></div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true"><span class="bar"></span>Scroll to build</div>
+  </section>
+
+  <!-- ===================== 01 · PRECONSTRUCTION ===================== -->
+  <section class="chapter chapter--plan" id="preconstruction">
+    <div class="chapter__inner">
+      <div class="marker" data-elev="EL. 12&#8242;">
+        <span class="phase">Phase 01 — Preconstruction</span>
+        <span class="rule"></span>
+        <span class="elev">EL. 12&#8242;-0&#8243;</span>
+      </div>
+      <div class="plan-grid">
+        <div>
+          <h2 class="head reveal">Before the first<br>stone, the plan.</h2>
+          <p class="lede reveal d1">The cost of a build is decided long before anyone breaks ground.
+            We price it, schedule it, and pull the permits up front — so the number you approve is the
+            number you pay, and the date we give is the date you get.</p>
+          <ul class="plan-list reveal d2">
+            <li><span class="k">A</span><div><h4>Design–Build</h4><p>One contract for design and construction — fewer handoffs, fewer surprises, a single team accountable end to end.</p></div></li>
+            <li><span class="k">B</span><div><h4>Budgeting &amp; Estimating</h4><p>Real numbers early, with allowances and alternates laid out so you can make decisions with the full picture.</p></div></li>
+            <li><span class="k">C</span><div><h4>Permitting &amp; Scheduling</h4><p>We navigate Florida code, inspections, and the calendar so the critical path is set before the first delivery arrives.</p></div></li>
+          </ul>
+        </div>
+        <figure class="plan-draw reveal d2" aria-label="Blueprint floor plan drawing">
+          <svg viewBox="0 0 300 375" preserveAspectRatio="xMidYMid meet">
+            <rect class="pline" x="40" y="40" width="220" height="290"/>
+            <line class="pline" x1="40" y1="150" x2="260" y2="150"/>
+            <line class="pline" x1="150" y1="40" x2="150" y2="150"/>
+            <line class="pline" x1="150" y1="230" x2="260" y2="230"/>
+            <path class="pline" d="M40 230 L110 230 L110 330"/>
+            <path class="paccent" d="M40 40 L64 40 M40 40 L40 64"/>
+            <circle class="pline" cx="205" cy="90" r="18"/>
+            <line class="pline paccent" x1="150" y1="230" x2="180" y2="200"/>
+            <text class="ptext" x="48" y="30">A-101</text>
+            <text class="ptext" x="200" y="352">SCALE 1/4&#8243;=1&#8242;</text>
+          </svg>
+          <figcaption class="cap">Sheet A-101 · Preconstruction set</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 02 · THE BUILD ===================== -->
+  <section class="chapter chapter--dark" id="build">
+    <div class="chapter__inner">
+      <div class="marker" data-elev="EL. 34&#8242;">
+        <span class="phase">Phase 02 — The Build</span>
+        <span class="rule"></span>
+        <span class="elev">EL. 34&#8242;-0&#8243;</span>
+      </div>
+      <h2 class="head reveal">We build it right,<br>in the right order.</h2>
+      <p class="lede reveal d1">Every trade, every delivery, every inspection — sequenced and supervised by us.
+        These are the services we stack, course by course, to carry a project from ground to grand opening.</p>
+
+      <div class="courses reveal d2">
+        <div class="course">
+          <span class="idx">S-01</span>
+          <div class="body"><h3>General Contracting</h3>
+            <p>Full-scope construction with our own supervision on site — one point of accountability for schedule, budget, quality, and safety.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+        <div class="course">
+          <span class="idx">S-02</span>
+          <div class="body"><h3>Construction Management</h3>
+            <p>We run the job on your behalf — trades, procurement, and the critical path managed to protect your date and your dollars.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+        <div class="course">
+          <span class="idx">S-03</span>
+          <div class="body"><h3>Design–Build</h3>
+            <p>Design and construction under one roof and one contract, so the drawings and the budget never drift apart.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+        <div class="course">
+          <span class="idx">S-04</span>
+          <div class="body"><h3>Preconstruction</h3>
+            <p>Estimating, value engineering, permitting, and scheduling that turn an idea into a buildable, financeable plan.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+        <div class="course">
+          <span class="idx">S-05</span>
+          <div class="body"><h3>Development</h3>
+            <p>Site through certificate of occupancy — we help move ground-up projects from raw parcel to a finished, income-ready building.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+        <div class="course">
+          <span class="idx">S-06</span>
+          <div class="body"><h3>Renovation &amp; Build-Out</h3>
+            <p>Tenant improvements and full remodels — restaurants, retail, gyms, and homes reworked with minimal downtime.</p></div>
+          <span class="plus" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 · FINISHING / WORK ===================== -->
+  <section class="chapter chapter--work" id="work">
+    <div class="chapter__inner">
+      <div class="marker" data-elev="EL. 58&#8242;">
+        <span class="phase">Phase 03 — Finishing</span>
+        <span class="rule"></span>
+        <span class="elev">EL. 58&#8242;-0&#8243;</span>
+      </div>
+      <h2 class="head reveal">What we put<br>our name on.</h2>
+      <p class="lede reveal d1">Commercial spaces that have to open on time, and homes that have to feel right for
+        decades. A range of the work Cornerstone-EC delivers across Florida.</p>
+
+      <div class="work-grid reveal d2">
+        <figure class="tile tile--lg">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · restaurant</span>
+          <figcaption><h3>Restaurants</h3><span class="meta">GROUND-UP<br>&amp; BUILD-OUT</span></figcaption>
+        </figure>
+        <figure class="tile tile--sm">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · retail</span>
+          <figcaption><h3>Retail</h3><span class="meta">STOREFRONT</span></figcaption>
+        </figure>
+        <figure class="tile tile--sm">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · fitness</span>
+          <figcaption><h3>Fitness</h3><span class="meta">GYM · STUDIO</span></figcaption>
+        </figure>
+        <figure class="tile tile--sm">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · education</span>
+          <figcaption><h3>Education</h3><span class="meta">FACILITIES</span></figcaption>
+        </figure>
+        <figure class="tile tile--sm">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · homes</span>
+          <figcaption><h3>Custom Homes</h3><span class="meta">RESIDENTIAL</span></figcaption>
+        </figure>
+        <figure class="tile tile--wide">
+          <span class="ph" aria-hidden="true"></span>
+          <span class="slot-tag">Photo · renovation</span>
+          <figcaption><h3>Renovations &amp; Remodels</h3><span class="meta">KITCHEN · BATH<br>· FULL INTERIOR</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 04 · COMPLETE ===================== -->
+  <section class="chapter chapter--complete" id="complete">
+    <div class="chapter__inner">
+      <div class="marker" data-elev="EL. 72&#8242;">
+        <span class="phase">Phase 04 — Delivered</span>
+        <span class="rule"></span>
+        <span class="elev">EL. 72&#8242;-0&#8243;</span>
+      </div>
+      <h2 class="head reveal">On time. On budget.<br>On our word.</h2>
+
+      <div class="stat-row reveal d1">
+        <div class="cell"><div class="n">10<span class="u">+</span></div><div class="l">Years in business</div></div>
+        <div class="cell"><div class="n">2</div><div class="l">Sectors — commercial &amp; residential</div></div>
+        <div class="cell"><div class="n">6</div><div class="l">Build types, ground-up to remodel</div></div>
+        <div class="cell"><div class="n">1</div><div class="l">Team accountable, start to finish</div></div>
+      </div>
+
+      <div class="values reveal d2">
+        <div class="value"><span class="k">Value 01</span><h4>Clear Communication</h4>
+          <p>You always know the status, the number, and the next step. No silence, no surprises on the invoice.</p></div>
+        <div class="value"><span class="k">Value 02</span><h4>Solid Coordination</h4>
+          <p>Trades sequenced so the job flows — the electrician isn't waiting on the framer, and the schedule holds.</p></div>
+        <div class="value"><span class="k">Value 03</span><h4>Dependable Execution</h4>
+          <p>We do it the right way the first time, and we stand behind the work after the final walkthrough.</p></div>
+      </div>
+
+      <div class="quote reveal d2">
+        <blockquote>&ldquo;They ran our build-out like it was their own business opening — same deadline pressure,
+          none of the drama. We opened on schedule.&rdquo;</blockquote>
+        <span class="who">Client name, project — <span class="slot-note">replace with a real testimonial</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="chapter chapter--contact" id="contact">
+    <div class="chapter__inner">
+      <div class="contact-grid">
+        <div class="contact-lead">
+          <div class="marker" data-elev="EL. 84&#8242;" style="margin-bottom:1.4rem">
+            <span class="phase">Set 1 — Your Cornerstone</span>
+            <span class="rule"></span>
+          </div>
+          <span class="cornerstone-mark"><span class="stone" aria-hidden="true"></span>Let&rsquo;s set the first stone</span>
+          <h2 class="head reveal">Tell us what<br>you&rsquo;re building.</h2>
+          <p class="lede reveal d1">Send the basics and we&rsquo;ll come back with next steps — a walkthrough,
+            a ballpark, and an honest read on scope and schedule.</p>
+
+          <div class="direct reveal d2">
+            <a href="tel:+15550000000"><span class="k">Call</span><span class="v">(555)&nbsp;000&#8209;0000</span></a>
+            <a href="mailto:info@cornerstoneec-gc.com"><span class="k">Email</span><span class="v">info@cornerstoneec-gc.com</span></a>
+            <span><span class="k">Area</span><span class="v">Serving all of Florida</span></span>
+            <span><span class="k">License</span><span class="v">FL GC · CGC #___</span></span>
+          </div>
+        </div>
+
+        <form class="enquiry reveal d1" id="enquiry" novalidate>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-type">Project type</label>
+            <select id="f-type" name="type">
+              <option>Commercial — new build</option>
+              <option>Commercial — build-out / renovation</option>
+              <option>Restaurant / retail / fitness</option>
+              <option>Custom home</option>
+              <option>Home renovation / remodel</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-msg">Project details</label>
+            <textarea id="f-msg" name="message" placeholder="Location, rough scope, timeline, budget range if you have one…"></textarea>
+          </div>
+          <button class="btn" type="submit">Send project details <span class="arw">&rarr;</span></button>
+          <p class="form-note" id="formNote">This form is a front-end demo — connect it to email or a form service (Formspree, Netlify Forms, etc.) to receive submissions.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-brand">Cornerstone&#8209;EC
+        <p>Cornerstone Engineering &amp; Contracting — a licensed Florida general contractor
+          building commercial and residential projects, from the first stone to the final walkthrough.</p>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h5>Build</h5>
+      <a href="#preconstruction">Preconstruction</a>
+      <a href="#build">The Build</a>
+      <a href="#work">Work</a>
+      <a href="#complete">Delivered</a>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <a href="tel:+15550000000">(555) 000-0000</a>
+      <a href="mailto:info@cornerstoneec-gc.com">info@cornerstoneec-gc.com</a>
+      <span>Serving all of Florida</span>
+      <span>FL GC · CGC #___</span>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>&copy; <span id="yr"></span> Cornerstone Engineering &amp; Contracting</span>
+    <span>Florida-based general contractor · Commercial &amp; Residential</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- hero build-in ---- */
+  var hero = document.getElementById("hero");
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ hero.classList.add("lit"); }); });
+
+  /* ---- reveal on scroll ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold:0.16, rootMargin:"0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal, .marker").forEach(function(el){ io.observe(el); });
+
+  /* ---- header light/dark by section + scrolled state ---- */
+  var head = document.getElementById("head");
+  var spine = document.getElementById("spine");
+  var elev = document.getElementById("elev");
+  var darkSections = [].slice.call(document.querySelectorAll(".hero, .chapter--dark, .chapter--navy, .chapter--contact"));
+
+  /* ---- spine fill + elevation counter ---- */
+  var spineFill = document.getElementById("spineFill");
+  var docEl = document.documentElement;
+  var ticking = false;
+
+  function overDark(){
+    var probe = head.getBoundingClientRect().bottom + 4;
+    for(var i=0;i<darkSections.length;i++){
+      var r = darkSections[i].getBoundingClientRect();
+      if(r.top <= probe && r.bottom >= probe) return true;
+    }
+    return false;
+  }
+
+  function onScroll(){
+    var top = window.scrollY || docEl.scrollTop;
+    var h = docEl.scrollHeight - window.innerHeight;
+    var p = h>0 ? Math.min(1, top/h) : 0;
+
+    spineFill.style.height = (p*100).toFixed(2) + "%";
+
+    // elevation readout climbs 0 -> 84 ft
+    var ft = Math.round(p*84);
+    elev.textContent = "EL. " + ft + "′-0″";
+
+    head.classList.toggle("scrolled", top > 12);
+    var dark = overDark();
+    head.classList.toggle("is-dark", dark);
+    spine.classList.toggle("on-dark", dark);
+    elev.classList.toggle("on-dark", dark);
+
+    ticking = false;
+  }
+  window.addEventListener("scroll", function(){
+    if(!ticking){ ticking=true; requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  /* ---- active nav link ---- */
+  var links = [].slice.call(document.querySelectorAll(".nav a"));
+  var map = links.map(function(a){ var t=document.querySelector(a.getAttribute("href")); return {a:a,t:t}; })
+                 .filter(function(x){ return x.t; });
+  var navIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        map.forEach(function(m){ m.a.classList.toggle("active", m.t===e.target); });
+      }
+    });
+  }, { rootMargin:"-45% 0px -50% 0px", threshold:0 });
+  map.forEach(function(m){ navIo.observe(m.t); });
+
+  /* ---- mobile menu (simple anchor jump list) ---- */
+  var menuBtn = document.getElementById("menuBtn");
+  if(menuBtn){
+    menuBtn.setAttribute("aria-expanded","false");
+    menuBtn.addEventListener("click", function(){
+      var open = head.classList.toggle("menu-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.innerHTML = open ? "&times;" : "&#9776;";
+    });
+  }
+
+  /* ---- smooth anchors (also close the mobile menu) ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(ev){
+      var id = a.getAttribute("href");
+      if(id.length>1){
+        var t = document.querySelector(id);
+        if(t){ ev.preventDefault(); t.scrollIntoView({behavior: reduce?"auto":"smooth", block:"start"}); }
+      }
+      if(head.classList.contains("menu-open")){
+        head.classList.remove("menu-open");
+        if(menuBtn){ menuBtn.setAttribute("aria-expanded","false"); menuBtn.innerHTML="&#9776;"; }
+      }
+    });
+  });
+
+  /* ---- form (demo) ---- */
+  var form = document.getElementById("enquiry");
+  var note = document.getElementById("formNote");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("f-name");
+    var email = document.getElementById("f-email");
+    if(!name.value.trim() || !email.value.trim()){
+      note.textContent = "Add your name and email so we can get back to you.";
+      note.style.color = "var(--amber-bright)";
+      (name.value.trim()?email:name).focus();
+      return;
+    }
+    note.textContent = "Thanks — this demo doesn't send yet. Wire it to your inbox to go live.";
+    note.style.color = "var(--amber-bright)";
+    form.querySelector(".btn").textContent = "Received ✓";
+  });
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
