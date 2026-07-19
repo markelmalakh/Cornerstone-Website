@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cornerstone-EC — Florida General Contractor | Commercial &amp; Residential</title>
 <meta name="description" content="Cornerstone Engineering &amp; Contracting — a licensed Florida general contractor with ten years building commercial and residential projects. Preconstruction, design-build, and construction management, delivered from the first stone to the final walkthrough." />
+<link rel="icon" type="image/png" href="assets/logo-mark.png" />
 
 <!-- Fonts. If self-hosting later, download these and swap the <link> for @font-face. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -110,16 +111,9 @@ button{font:inherit;cursor:pointer}
 .site-head.scrolled{border-bottom-color:rgba(24,23,15,.12)}
 .site-head.is-dark.scrolled{border-bottom-color:rgba(245,242,236,.14)}
 
-.brand{display:flex;align-items:center;gap:.62rem;font-family:var(--display);
-  font-weight:800;font-variation-settings:"wght" 800,"wdth" 110;
-  text-transform:uppercase;letter-spacing:.02em;font-size:1.02rem}
-.brand .stone{
-  width:15px;height:15px;background:var(--amber);
-  transform:rotate(0);flex:none;
-  box-shadow:3px 3px 0 color-mix(in srgb, var(--amber-deep) 90%, black 10%);
-}
-.brand small{font-family:var(--mono);font-weight:500;font-size:.6rem;
-  letter-spacing:.22em;opacity:.6;display:block;margin-top:2px;text-transform:uppercase}
+.brand{display:flex;align-items:center;gap:.62rem;flex:none}
+.brand img{height:38px;width:auto;display:block;transition:filter .4s var(--ease)}
+.site-head.is-dark .brand img{filter:brightness(0) invert(1)}   /* white logo on dark */
 
 .nav{display:flex;align-items:center;gap:1.85rem}
 .nav a{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
@@ -129,6 +123,7 @@ button{font:inherit;cursor:pointer}
 .nav a:hover{opacity:1}
 .nav a:hover::after,.nav a.active::after{right:0}
 .nav a.active{opacity:1}
+.nav .nav-cta{display:none}   /* mobile-only CTA; shown inside the dropdown */
 
 .head-cta{display:flex;align-items:center;gap:1rem}
 .head-phone{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;opacity:.85;white-space:nowrap}
@@ -314,6 +309,26 @@ h2.head{font-family:var(--display);font-weight:800;font-variation-settings:"wght
   font-size:.62rem;letter-spacing:.16em;color:#cfe0f0;opacity:.85;text-transform:uppercase}
 
 /* ============================================================
+   FULL-BLEED PHOTO BANDS  (real project photography)
+   ============================================================ */
+.band{position:relative;min-height:clamp(360px,62vh,620px);display:flex;align-items:flex-end;
+  padding:clamp(2rem,6vw,4.5rem) var(--pad-x) clamp(2rem,6vw,4rem) var(--rail);
+  overflow:hidden;color:var(--chalk);background:var(--navy-deep)}
+.band__media{position:absolute;inset:0;z-index:0}
+.band__media img{width:100%;height:100%;object-fit:cover;object-position:center}
+.band::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,20,32,.30) 0%,rgba(10,20,32,.42) 45%,rgba(10,20,32,.86) 100%)}
+.band__inner{position:relative;z-index:2;max-width:var(--measure);margin:0 auto;width:100%}
+.band__eyebrow{display:flex;align-items:center;gap:.8rem;color:var(--amber-bright);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.1rem}
+.band__eyebrow .tick{width:26px;height:1.5px;background:var(--amber)}
+.band h2{font-family:var(--display);font-weight:800;font-variation-settings:"wght" 810,"wdth" 120;
+  text-transform:uppercase;line-height:.95;letter-spacing:-.01em;margin:0;
+  font-size:clamp(2.1rem,6vw,4.6rem);max-width:16ch}
+.band p{margin:1.1rem 0 0;max-width:48ch;font-size:clamp(1rem,1.4vw,1.2rem);
+  color:color-mix(in srgb,var(--chalk) 84%, transparent)}
+
+/* ============================================================
    THE BUILD  (services as rising courses)
    ============================================================ */
 .courses{display:grid;gap:0;margin-top:2.5rem;border-top:1px solid rgba(245,242,236,.14)}
@@ -339,32 +354,44 @@ h2.head{font-family:var(--display);font-weight:800;font-variation-settings:"wght
    FINISHING  (work / project types gallery)
    ============================================================ */
 .chapter--work{background:linear-gradient(180deg,#e4e6e6 0,var(--concrete) 55%, #efe7d9 100%)}
-.work-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:2.6rem}
-.tile{position:relative;overflow:hidden;background:var(--navy);color:var(--chalk);
-  min-height:0;isolation:isolate;transition:transform .5s var(--ease)}
-.tile--lg{grid-column:span 3;aspect-ratio:16/11}
-.tile--sm{grid-column:span 2;aspect-ratio:1/1}
-.tile--wide{grid-column:span 3;aspect-ratio:16/7}
-/* placeholder art: concrete/blueprint gradient stand-in for a photo */
-.tile .ph{position:absolute;inset:0;z-index:-1;
-  background:
-    linear-gradient(135deg, rgba(206,122,52,.16), transparent 55%),
-    repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 10px, transparent 10px 20px),
-    linear-gradient(160deg,var(--navy-soft),var(--navy-deep));
-  transition:transform .8s var(--ease);
-}
-.tile:hover .ph{transform:scale(1.05)}
-.tile:hover{transform:translateY(-4px)}
-.tile figcaption{position:absolute;inset:auto 0 0 0;padding:1.2rem 1.25rem;
-  background:linear-gradient(0deg,rgba(10,20,32,.86),transparent);
+
+/* featured real project: photo + copy */
+.work-feature{display:grid;grid-template-columns:minmax(0,.82fr) 1fr;gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:stretch;margin-top:2.8rem}
+.work-photo{position:relative;margin:0;overflow:hidden;background:var(--navy);
+  box-shadow:0 40px 70px -40px rgba(14,27,44,.6)}
+.work-photo img{width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center;
+  display:block;transition:transform .8s var(--ease)}
+.work-photo:hover img{transform:scale(1.04)}
+.work-photo figcaption{position:absolute;inset:auto 0 0 0;padding:1.3rem 1.4rem;color:var(--chalk);
+  background:linear-gradient(0deg,rgba(10,20,32,.9),transparent);
   display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
-.tile figcaption h3{margin:0;font-family:var(--display);font-weight:750;
-  font-variation-settings:"wght" 760,"wdth" 112;text-transform:uppercase;font-size:1.15rem;line-height:1}
-.tile figcaption .meta{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;
-  opacity:.7;text-align:right;line-height:1.4}
-.tile .slot-tag{position:absolute;top:12px;left:12px;font-family:var(--mono);
-  font-size:.56rem;letter-spacing:.12em;color:var(--amber-bright);opacity:.8;
-  border:1px dashed rgba(229,140,58,.5);padding:.25rem .45rem;text-transform:uppercase}
+.work-photo figcaption h3{margin:0;font-family:var(--display);font-weight:750;
+  font-variation-settings:"wght" 760,"wdth" 112;text-transform:uppercase;font-size:1.2rem;line-height:1.05}
+.work-photo figcaption .meta{font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;
+  opacity:.75;text-align:right;line-height:1.5;white-space:nowrap}
+.work-copy{display:flex;flex-direction:column;justify-content:center}
+.work-copy h3{font-family:var(--display);font-weight:770;font-variation-settings:"wght" 770,"wdth" 112;
+  text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.3rem);line-height:1;margin:0 0 1rem}
+.work-copy p{margin:0 0 1.8rem;color:var(--ink-soft);max-width:44ch}
+.work-copy .btn{align-self:flex-start}
+
+/* what we build — category cards */
+.cat-head{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber-deep);margin:clamp(3rem,6vw,4.5rem) 0 1.5rem;display:flex;align-items:center;gap:.8rem}
+.cat-head .rule{flex:1;height:1px;background:var(--concrete-dim)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cat{position:relative;overflow:hidden;background:var(--navy);color:var(--chalk);
+  aspect-ratio:16/9;padding:1.3rem 1.35rem;display:flex;flex-direction:column;justify-content:space-between;
+  isolation:isolate;transition:transform .45s var(--ease),background .45s}
+.cat::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;transition:opacity .45s;
+  background:linear-gradient(135deg,rgba(206,122,52,.14),transparent 55%),linear-gradient(160deg,var(--navy-soft),var(--navy-deep))}
+.cat:hover{transform:translateY(-4px)}
+.cat:hover::before{opacity:.85}
+.cat .n{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;opacity:.55}
+.cat h4{margin:0;font-family:var(--display);font-weight:750;font-variation-settings:"wght" 760,"wdth" 112;
+  text-transform:uppercase;font-size:clamp(1.05rem,1.8vw,1.4rem);line-height:1.02}
+.cat .tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;opacity:.6;text-transform:uppercase}
 
 /* ============================================================
    COMPLETE  (proof / stats / values — warm)
@@ -414,6 +441,22 @@ h2.head{font-family:var(--display);font-weight:800;font-variation-settings:"wght
   text-transform:uppercase;color:var(--ink-soft);margin-top:.45rem;display:block;line-height:1.5}
 
 /* ============================================================
+   BRAND FILM  (logo animation moment before the CTA)
+   ============================================================ */
+.brandfilm{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.brandfilm__copy .eyebrow{display:flex;align-items:center;gap:.8rem;color:var(--amber-bright);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.3rem}
+.brandfilm__copy .eyebrow .tick{width:26px;height:1.5px;background:var(--amber)}
+.brandfilm__copy h2{font-size:clamp(2rem,4.6vw,3.6rem)}
+.brandfilm__copy p{margin:1.2rem 0 2rem;max-width:42ch}
+.brandfilm__panel{position:relative;overflow:hidden;background:var(--navy-deep);
+  border:1px solid rgba(245,242,236,.14);aspect-ratio:16/10;
+  box-shadow:0 40px 70px -40px rgba(0,0,0,.6)}
+.brandfilm__panel video{width:100%;height:100%;object-fit:cover;display:block}
+.brandfilm__badge{position:absolute;bottom:12px;left:14px;font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.5}
+
+/* ============================================================
    CONTACT  (spine terminates in a cornerstone)
    ============================================================ */
 .chapter--contact{background:var(--navy-deep);color:var(--chalk);position:relative;overflow:hidden}
@@ -442,6 +485,7 @@ form.enquiry{display:grid;gap:1.1rem;background:rgba(245,242,236,.035);
   border:1px solid rgba(245,242,236,.12);padding:clamp(1.4rem,3vw,2.2rem)}
 .field{display:grid;gap:.45rem}
 .field label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.field label .opt{opacity:.6;letter-spacing:.04em}
 .field input,.field select,.field textarea{
   background:transparent;border:none;border-bottom:1.5px solid rgba(245,242,236,.22);
   color:var(--chalk);font-family:var(--body);font-size:1rem;padding:.55rem 0;
@@ -461,6 +505,7 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
 .site-foot{background:#0a1522;color:var(--chalk);padding:3.5rem var(--pad-x) 2.5rem var(--rail)}
 .foot-inner{max-width:var(--measure);margin:0 auto;display:grid;
   grid-template-columns:1.4fr 1fr 1fr;gap:2rem;align-items:start}
+.foot-logo{height:42px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:.3rem}
 .foot-brand{font-family:var(--display);font-weight:800;font-variation-settings:"wght" 800,"wdth" 120;
   text-transform:uppercase;font-size:1.5rem;line-height:.95}
 .foot-brand p{font-family:var(--body);font-weight:400;text-transform:none;
@@ -483,14 +528,13 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
   .blueprint-art{max-width:440px;order:2}
   .plan-grid,.contact-grid{grid-template-columns:1fr}
   .plan-draw{max-width:420px;order:-1}
-  .work-grid{grid-template-columns:repeat(4,1fr)}
-  .tile--lg,.tile--wide{grid-column:span 4}
-  .tile--sm{grid-column:span 2}
+  .work-feature{grid-template-columns:1fr;gap:1.6rem}
+  .work-photo img{min-height:300px;max-height:520px}
+  .brandfilm{grid-template-columns:1fr;gap:2rem}
 }
 @media (max-width:760px){
   .head-phone{display:none}
-  .brand{font-size:.92rem}
-  .brand small{display:none}
+  .brand img{height:30px}
   .head-cta .btn{display:none}            /* CTA lives inside the dropdown on mobile */
   .menu-toggle{display:inline-flex;align-items:center;justify-content:center;
     width:44px;height:40px;background:transparent;border:1.5px solid currentColor;color:inherit;font-size:1.15rem}
@@ -503,7 +547,7 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
   .nav a{padding:.95rem 0;font-size:.82rem;color:var(--chalk);opacity:.85;
     border-bottom:1px solid rgba(245,242,236,.08)}
   .nav a::after{display:none}
-  .nav .nav-cta{margin-top:1rem;background:var(--amber);color:var(--navy-deep);
+  .nav .nav-cta{display:block;margin-top:1rem;background:var(--amber);color:var(--navy-deep);
     text-align:center;border:none;font-weight:600;opacity:1;letter-spacing:.1em}
   .hero__stats,.stat-row{grid-template-columns:1fr 1fr;gap:0}
   .hero__stats div{border-left:1px solid rgba(245,242,236,.10)}
@@ -514,9 +558,7 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
   .stat-row .cell:nth-child(n+3){margin-top:1.4rem}
   .values{grid-template-columns:1fr}
   .testi__grid{grid-template-columns:1fr}
-  .work-grid{grid-template-columns:1fr 1fr}
-  .tile--lg,.tile--wide{grid-column:span 2}
-  .tile--sm{grid-column:span 1}
+  .cat-grid{grid-template-columns:1fr 1fr}
   .course{grid-template-columns:auto 1fr;gap:1rem}
   .course .plus{display:none}
   .field--row{grid-template-columns:1fr}
@@ -540,9 +582,8 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
 
 <!-- ===================== HEADER ===================== -->
 <header class="site-head is-dark" id="head">
-  <a class="brand" href="#top" aria-label="Cornerstone-EC home">
-    <span class="stone" aria-hidden="true"></span>
-    <span>Cornerstone-EC<small>Gen. Contractor · FL</small></span>
+  <a class="brand" href="#top" aria-label="Cornerstone Engineering and Contracting — home">
+    <img src="assets/logo.png" alt="Cornerstone Engineering and Contracting" />
   </a>
   <nav class="nav" aria-label="Primary">
     <a href="#preconstruction">Preconstruction</a>
@@ -667,6 +708,18 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
     </div>
   </section>
 
+  <!-- ===================== FULL-BLEED BAND · BREAKING GROUND ===================== -->
+  <!-- Real project photo. To change it later, replace assets/project-foundation.jpg -->
+  <section class="band" aria-label="On site — breaking ground">
+    <div class="band__media"><img src="assets/project-foundation.jpg" alt="Cornerstone crew setting foundations and anchor bolts on an active job site" loading="lazy" /></div>
+    <div class="band__inner reveal">
+      <p class="band__eyebrow"><span class="tick"></span>On site · Foundations set</p>
+      <h2>Then we break ground.</h2>
+      <p>Footings, anchor bolts, and the first courses laid to the line — the point where the plan
+        becomes a building, and where our supervision never leaves the site.</p>
+    </div>
+  </section>
+
   <!-- ===================== 02 · THE BUILD ===================== -->
   <section class="chapter chapter--dark" id="build">
     <div class="chapter__inner">
@@ -732,37 +785,29 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
       <p class="lede reveal d1">Commercial spaces that have to open on time, and homes that have to feel right for
         decades. A range of the work Cornerstone-EC delivers across Florida.</p>
 
-      <div class="work-grid reveal d2">
-        <figure class="tile tile--lg">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · restaurant</span>
-          <figcaption><h3>Restaurants</h3><span class="meta">GROUND-UP<br>&amp; BUILD-OUT</span></figcaption>
+      <!-- Featured real project. To change it later, replace assets/project-restroom.jpg -->
+      <div class="work-feature reveal d2">
+        <figure class="work-photo">
+          <img src="assets/project-restroom.jpg" alt="Finished commercial restroom with custom backlit stone vanity, LED mirror, and hexagon tile" loading="lazy" />
+          <figcaption><h3>Commercial interior finishing</h3><span class="meta">CUSTOM STONE VANITY<br>LED · HEX TILE</span></figcaption>
         </figure>
-        <figure class="tile tile--sm">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · retail</span>
-          <figcaption><h3>Retail</h3><span class="meta">STOREFRONT</span></figcaption>
-        </figure>
-        <figure class="tile tile--sm">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · fitness</span>
-          <figcaption><h3>Fitness</h3><span class="meta">GYM · STUDIO</span></figcaption>
-        </figure>
-        <figure class="tile tile--sm">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · education</span>
-          <figcaption><h3>Education</h3><span class="meta">FACILITIES</span></figcaption>
-        </figure>
-        <figure class="tile tile--sm">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · homes</span>
-          <figcaption><h3>Custom Homes</h3><span class="meta">RESIDENTIAL</span></figcaption>
-        </figure>
-        <figure class="tile tile--wide">
-          <span class="ph" aria-hidden="true"></span>
-          <span class="slot-tag">Photo · renovation</span>
-          <figcaption><h3>Renovations &amp; Remodels</h3><span class="meta">KITCHEN · BATH<br>· FULL INTERIOR</span></figcaption>
-        </figure>
+        <div class="work-copy">
+          <h3>Finishing that reads as craft.</h3>
+          <p>The difference between a space that&rsquo;s built and a space that sells is in the last ten
+            percent — the millwork, the lighting, the tile lines that hold true. We treat the finish like
+            it&rsquo;s the whole job, because to your customers, it is.</p>
+          <a class="btn" href="#contact">Start your project <span class="arw">&rarr;</span></a>
+        </div>
+      </div>
+
+      <p class="cat-head reveal d3">What we build<span class="rule"></span>Commercial &amp; residential</p>
+      <div class="cat-grid reveal d3">
+        <div class="cat"><span class="n">01</span><h4>Restaurants</h4><span class="tag">Ground-up &amp; build-out</span></div>
+        <div class="cat"><span class="n">02</span><h4>Retail</h4><span class="tag">Storefront &amp; tenant fit-out</span></div>
+        <div class="cat"><span class="n">03</span><h4>Fitness</h4><span class="tag">Gyms &amp; studios</span></div>
+        <div class="cat"><span class="n">04</span><h4>Education</h4><span class="tag">Learning facilities</span></div>
+        <div class="cat"><span class="n">05</span><h4>Custom Homes</h4><span class="tag">Residential new build</span></div>
+        <div class="cat"><span class="n">06</span><h4>Renovations</h4><span class="tag">Kitchen · bath · full interior</span></div>
       </div>
     </div>
   </section>
@@ -832,6 +877,29 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
     </div>
   </section>
 
+  <!-- ===================== BRAND FILM ===================== -->
+  <!-- Logo animation. Swap the source to assets/brand-white.mp4 or assets/brand-vertical.mp4 to change it. -->
+  <section class="chapter chapter--navy" id="brand">
+    <div class="chapter__inner">
+      <div class="brandfilm">
+        <div class="brandfilm__copy reveal">
+          <p class="eyebrow"><span class="tick"></span>Cornerstone Engineering &amp; Contracting</p>
+          <h2 class="head">Built on one<br>standard.</h2>
+          <p class="lede">Ten years, one name on the permit, and the same promise on every job — commercial
+            or residential, ground-up or remodel. If you can picture it, we can price it, build it, and
+            stand behind it.</p>
+          <a class="btn" href="#contact">Request a proposal <span class="arw">&rarr;</span></a>
+        </div>
+        <figure class="brandfilm__panel reveal d1">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/logo-stacked-alt.jpg">
+            <source src="assets/brand-blue.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="brandfilm__badge">Brand film · Cornerstone-EC</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== CONTACT ===================== -->
   <section class="chapter chapter--contact" id="contact">
     <div class="chapter__inner">
@@ -854,38 +922,88 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
           </div>
         </div>
 
-        <form class="enquiry reveal d1" id="enquiry" novalidate>
-          <div class="field">
-            <label for="f-name">Name</label>
-            <input id="f-name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+        <!-- ===== PROPOSAL REQUEST · powered by FormSubmit (https://formsubmit.co) =====
+             Submissions are emailed to the address in the form's action below.
+             To change where they go, edit that email. To hide the address from the page
+             source, activate once, then swap it for the random alias FormSubmit emails you
+             (e.g. action="https://formsubmit.co/xxxxxxxxxxxxxxxx").
+             After deploying, set _next to your live thank-you URL for a branded confirmation. -->
+        <form class="enquiry reveal d1" id="proposalForm"
+              action="https://formsubmit.co/marke@cornerstoneec-gc.com" method="POST">
+          <input type="hidden" name="_subject" value="New proposal request — Cornerstone-EC website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Cornerstone Engineering & Contracting. We've received your request and will get back to you shortly with next steps — a walkthrough, a ballpark, and an honest read on scope and schedule." />
+          <!-- <input type="hidden" name="_next" value="https://cornerstoneec-gc.com/thank-you.html" /> -->
+          <!-- spam honeypot: real people leave this empty -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0" />
+
+          <div class="field--row">
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input id="f-name" name="Name" type="text" placeholder="Your name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="f-company">Company <span class="opt">(optional)</span></label>
+              <input id="f-company" name="Company" type="text" placeholder="Business name" autocomplete="organization" />
+            </div>
           </div>
           <div class="field--row">
             <div class="field">
               <label for="f-email">Email</label>
-              <input id="f-email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
+              <input id="f-email" name="Email" type="email" placeholder="you@email.com" autocomplete="email" required />
             </div>
             <div class="field">
               <label for="f-phone">Phone</label>
-              <input id="f-phone" name="phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel" />
+              <input id="f-phone" name="Phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="f-type">Project type</label>
+              <select id="f-type" name="Project type">
+                <option>Commercial — new build</option>
+                <option>Commercial — build-out / renovation</option>
+                <option>Restaurant / retail / fitness</option>
+                <option>Custom home</option>
+                <option>Home renovation / remodel</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-loc">Project location</label>
+              <input id="f-loc" name="Project location" type="text" placeholder="City, FL" autocomplete="address-level2" />
+            </div>
+          </div>
+          <div class="field--row">
+            <div class="field">
+              <label for="f-budget">Budget range</label>
+              <select id="f-budget" name="Budget range">
+                <option>Not sure yet</option>
+                <option>Under $50k</option>
+                <option>$50k – $150k</option>
+                <option>$150k – $500k</option>
+                <option>$500k – $1M</option>
+                <option>$1M+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-timeline">Timeline</label>
+              <select id="f-timeline" name="Timeline">
+                <option>As soon as possible</option>
+                <option>1 – 3 months</option>
+                <option>3 – 6 months</option>
+                <option>6 – 12 months</option>
+                <option>Just exploring</option>
+              </select>
             </div>
           </div>
           <div class="field">
-            <label for="f-type">Project type</label>
-            <select id="f-type" name="type">
-              <option>Commercial — new build</option>
-              <option>Commercial — build-out / renovation</option>
-              <option>Restaurant / retail / fitness</option>
-              <option>Custom home</option>
-              <option>Home renovation / remodel</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
             <label for="f-msg">Project details</label>
-            <textarea id="f-msg" name="message" placeholder="Location, rough scope, timeline, budget range if you have one…"></textarea>
+            <textarea id="f-msg" name="Project details" placeholder="Tell us about the space, the scope, and anything that matters to you…"></textarea>
           </div>
-          <button class="btn" type="submit">Send project details <span class="arw">&rarr;</span></button>
-          <p class="form-note" id="formNote">This form is a front-end demo — connect it to email or a form service (Formspree, Netlify Forms, etc.) to receive submissions.</p>
+          <button class="btn" type="submit">Request a proposal <span class="arw">&rarr;</span></button>
+          <p class="form-note">We reply to every request. First submission only: FormSubmit emails you a one-time link to confirm the receiving address — click it once and the form goes live.</p>
         </form>
       </div>
     </div>
@@ -897,7 +1015,8 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
 <footer class="site-foot">
   <div class="foot-inner">
     <div>
-      <div class="foot-brand">Cornerstone&#8209;EC
+      <div class="foot-brand">
+        <img class="foot-logo" src="assets/logo.png" alt="Cornerstone Engineering and Contracting" />
         <p>Cornerstone Engineering &amp; Contracting — a licensed Florida general contractor
           building commercial and residential projects, from the first stone to the final walkthrough.</p>
       </div>
@@ -1022,23 +1141,16 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
     });
   });
 
-  /* ---- form (demo) ---- */
-  var form = document.getElementById("enquiry");
-  var note = document.getElementById("formNote");
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var name = document.getElementById("f-name");
-    var email = document.getElementById("f-email");
-    if(!name.value.trim() || !email.value.trim()){
-      note.textContent = "Add your name and email so we can get back to you.";
-      note.style.color = "var(--amber-bright)";
-      (name.value.trim()?email:name).focus();
-      return;
-    }
-    note.textContent = "Thanks — this demo doesn't send yet. Wire it to your inbox to go live.";
-    note.style.color = "var(--amber-bright)";
-    form.querySelector(".btn").textContent = "Received ✓";
-  });
+  /* ---- proposal form: native POST to FormSubmit; give feedback on click ---- */
+  var form = document.getElementById("proposalForm");
+  if(form){
+    form.addEventListener("submit", function(){
+      if(form.checkValidity()){
+        var btn = form.querySelector(".btn");
+        if(btn){ btn.innerHTML = "Sending&hellip;"; btn.style.opacity = ".7"; }
+      }
+    });
+  }
 
   document.getElementById("yr").textContent = new Date().getFullYear();
 })();
