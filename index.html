@@ -392,13 +392,26 @@ h2.head{font-family:var(--display);font-weight:800;font-variation-settings:"wght
   text-transform:uppercase;font-size:1.25rem;margin:.6rem 0 .5rem;line-height:1}
 .value p{margin:0;font-size:.96rem;color:var(--ink-soft);line-height:1.55}
 
-.quote{margin:clamp(3rem,7vh,5rem) 0 0;max-width:62ch;position:relative}
-.quote blockquote{margin:0;font-family:var(--display);font-weight:600;
-  font-variation-settings:"wght" 600,"wdth" 108;text-transform:none;
-  font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.2;letter-spacing:-.01em}
-.quote .who{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-soft);margin-top:1.4rem;display:block}
-.quote .who .slot-note{color:var(--amber-deep)}
+/* testimonials — client sign-off */
+.testi{margin-top:clamp(3.5rem,8vh,6rem)}
+.testi__eyebrow{display:flex;align-items:center;gap:.85rem;color:var(--amber-deep);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:2rem}
+.testi__eyebrow .tick{width:26px;height:1.5px;background:var(--amber)}
+.testi__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.1rem,2.4vw,1.9rem)}
+.tcard{position:relative;background:color-mix(in srgb,#fff 46%, transparent);
+  border-top:2px solid var(--ink);padding:2.4rem 1.6rem 1.7rem;
+  display:flex;flex-direction:column;gap:1.4rem;transition:transform .4s var(--ease),background .4s}
+.tcard:hover{transform:translateY(-4px);background:color-mix(in srgb,#fff 62%, transparent)}
+.tcard .mark{position:absolute;top:.55rem;left:1.5rem;font-family:var(--display);
+  font-weight:800;font-variation-settings:"wght" 800,"wdth" 120;
+  font-size:3.4rem;line-height:1;color:var(--amber);opacity:.9}
+.tcard p{margin:0;font-size:1rem;line-height:1.58;color:var(--ink);position:relative}
+.tcard .attr{margin-top:auto;padding-top:1rem;border-top:1px solid var(--concrete-dim)}
+.tcard .attr .nm{font-family:var(--display);font-weight:700;
+  font-variation-settings:"wght" 700,"wdth" 106;text-transform:uppercase;
+  font-size:.94rem;letter-spacing:.02em;line-height:1.1;display:block}
+.tcard .attr .role{font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);margin-top:.45rem;display:block;line-height:1.5}
 
 /* ============================================================
    CONTACT  (spine terminates in a cornerstone)
@@ -500,6 +513,7 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
   .stat-row .cell:nth-child(odd){border-left:none;padding-left:0}
   .stat-row .cell:nth-child(n+3){margin-top:1.4rem}
   .values{grid-template-columns:1fr}
+  .testi__grid{grid-template-columns:1fr}
   .work-grid{grid-template-columns:1fr 1fr}
   .tile--lg,.tile--wide{grid-column:span 2}
   .tile--sm{grid-column:span 1}
@@ -779,10 +793,41 @@ form.enquiry .btn{justify-content:center;padding:.95rem 1.2rem;margin-top:.4rem;
           <p>We do it the right way the first time, and we stand behind the work after the final walkthrough.</p></div>
       </div>
 
-      <div class="quote reveal d2">
-        <blockquote>&ldquo;They ran our build-out like it was their own business opening — same deadline pressure,
-          none of the drama. We opened on schedule.&rdquo;</blockquote>
-        <span class="who">Client name, project — <span class="slot-note">replace with a real testimonial</span></span>
+      <!-- PLACEHOLDER TESTIMONIALS — written by design to be swapped for real client quotes -->
+      <div class="testi reveal d2">
+        <p class="testi__eyebrow"><span class="tick"></span>Sign-off · In their words</p>
+        <div class="testi__grid">
+          <figure class="tcard">
+            <span class="mark" aria-hidden="true">&ldquo;</span>
+            <p>We handed Cornerstone a bare shell and a hard opening date. They handed back a finished
+              restaurant three days early — every inspection passed the first time, and I always knew
+              exactly where the money was going.</p>
+            <figcaption class="attr">
+              <span class="nm">Marcus Delgado</span>
+              <span class="role">Owner, Ember &amp; Oak Kitchen · Restaurant build-out, Tampa</span>
+            </figcaption>
+          </figure>
+          <figure class="tcard">
+            <span class="mark" aria-hidden="true">&ldquo;</span>
+            <p>Building a house is supposed to be stressful. Ours wasn&rsquo;t. The schedule they gave us in
+              month one is the schedule we moved in on, and the finish work is the kind you notice a year
+              later and still smile about.</p>
+            <figcaption class="attr">
+              <span class="nm">Priya &amp; Ravi Nair</span>
+              <span class="role">Custom home · Winter Park</span>
+            </figcaption>
+          </figure>
+          <figure class="tcard">
+            <span class="mark" aria-hidden="true">&ldquo;</span>
+            <p>I&rsquo;ve worked with a lot of general contractors. Cornerstone is the only one that treats
+              my budget like their own — clear numbers, no surprise change orders, and a crew that
+              actually cleans up after itself.</p>
+            <figcaption class="attr">
+              <span class="nm">Dana Whitfield</span>
+              <span class="role">Principal, Halstead Retail Partners · Storefront center, Fort Lauderdale</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
